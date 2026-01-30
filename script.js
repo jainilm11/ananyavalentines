@@ -20,7 +20,7 @@ function createFloatingElements() {
     container.appendChild(el);
   };
 
-  const HEART_COUNT = 25;
+  const HEART_COUNT = 12;
 const BEAR_COUNT = 10;
 
 for (let i = 0; i < HEART_COUNT; i++) {
