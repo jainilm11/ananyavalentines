@@ -220,35 +220,86 @@ function setupEasterEgg() {
 }
 
 let loveProgress = 0;
+let loveTaps = 0;
+
+// tiny heart burst effect each tap (no libraries)
+function burstHearts() {
+  const container = document.querySelector(".floating-elements");
+  const emojis = (config.floatingEmojis && config.floatingEmojis.hearts) ? config.floatingEmojis.hearts : ["💖","💗","💓","❤️"];
+  for (let i = 0; i < 10; i++) {
+    const h = document.createElement("div");
+    h.className = "tap-heart";
+    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    h.style.left = (45 + Math.random() * 10) + "vw";
+    h.style.top = (65 + Math.random() * 10) + "vh";
+    h.style.animationDuration = (0.8 + Math.random() * 0.7) + "s";
+    container.appendChild(h);
+    setTimeout(() => h.remove(), 1400);
+  }
+}
 
 function showLoveGame() {
   const game = $("loveGame");
   const fill = $("loveFill");
   const status = $("loveStatus");
-  const btn = $("tapHeart");
+  const counter = $("loveCounter");
+  const tapBtn = $("tapHeart");
+  const nextBtn = $("loveNext");
+
+  // MORE TAPS: smaller increment
+  const INCREMENT = 4;          // 5% = ~20 taps to fill
+  const COMPLETE_DELAY_MS = 2000; // longer “break” before Next appears
 
   loveProgress = 0;
+  loveTaps = 0;
+
   fill.style.width = "0%";
+  fill.classList.remove("pulse");
   status.textContent = "Okay… start tapping 😛";
+  counter.textContent = `0% • 0 taps`;
+
+  tapBtn.disabled = false;
+  tapBtn.classList.remove("disabled-btn");
+  nextBtn.classList.add("hidden");
 
   show(game);
 
-  btn.onclick = () => {
-    loveProgress = Math.min(100, loveProgress + 12);
+  tapBtn.onclick = () => {
+    loveTaps++;
+    loveProgress = Math.min(100, loveProgress + INCREMENT);
+
+    // smooth animated fill
     fill.style.width = loveProgress + "%";
 
-    if (loveProgress >= 100) {
-      status.textContent = "Alr bro how were you able to get to max limit but... okay now one last thing…";
-      btn.disabled = true;
-      btn.classList.add("disabled-btn");
+    // tiny “automation” / feedback per tap
+    burstHearts();
 
+    counter.textContent = `${loveProgress}% • ${loveTaps} taps`;
+
+    if (loveProgress >= 100) {
+      status.textContent = "Alr bro how were you able to get the max limit u should say infinity but...";
+      tapBtn.disabled = true;
+      tapBtn.classList.add("disabled-btn");
+
+      // little pulse to celebrate completion
+      fill.classList.add("pulse");
+
+      // longer pause, THEN reveal Next button (no auto-jump)
       setTimeout(() => {
-        hide(game);
-        showFinalQuestion();
-      }, 900);
+        status.textContent = "Ready for the final question? 👀";
+        nextBtn.classList.remove("hidden");
+      }, COMPLETE_DELAY_MS);
     } else {
-      status.textContent = `Love Meter: ${loveProgress}%`;
+      // fun messages while filling
+      if (loveProgress < 35) status.textContent = "WOOOO";
+      else if (loveProgress < 70) status.textContent = "Yay u like me";
+      else status.textContent = "U cringe u love me";
     }
+  };
+
+  nextBtn.onclick = () => {
+    hide(game);
+    showFinalQuestion();
   };
 }
 
