@@ -1,242 +1,317 @@
-// Initialize configuration
 const config = window.VALENTINE_CONFIG;
 
-// Validate configuration
-function validateConfig() {
-    const warnings = [];
+// ---------- Helpers ----------
+function $(id) { return document.getElementById(id); }
 
-    // Check required fields
-    if (!config.valentineName) {
-        warnings.push("Valentine's name is not set! Using default.");
-        config.valentineName = "My Love";
-    }
+function show(el) { el.classList.remove("hidden"); }
+function hide(el) { el.classList.add("hidden"); }
 
-    // Validate colors
-    const isValidHex = (hex) => /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex);
-    Object.entries(config.colors).forEach(([key, value]) => {
-        if (!isValidHex(value)) {
-            warnings.push(`Invalid color for ${key}! Using default.`);
-            config.colors[key] = getDefaultColor(key);
-        }
-    });
-
-    // Validate animation values
-    if (parseFloat(config.animations.floatDuration) < 5) {
-        warnings.push("Float duration too short! Setting to 5s minimum.");
-        config.animations.floatDuration = "5s";
-    }
-
-    if (config.animations.heartExplosionSize < 1 || config.animations.heartExplosionSize > 3) {
-        warnings.push("Heart explosion size should be between 1 and 3! Using default.");
-        config.animations.heartExplosionSize = 1.5;
-    }
-
-    // Log warnings if any
-    if (warnings.length > 0) {
-        console.warn("⚠️ Configuration Warnings:");
-        warnings.forEach(warning => console.warn("- " + warning));
-    }
-}
-
-// Default color values
-function getDefaultColor(key) {
-    const defaults = {
-        backgroundStart: "#ffafbd",
-        backgroundEnd: "#ffc3a0",
-        buttonBackground: "#ff6b6b",
-        buttonHover: "#ff8787",
-        textColor: "#ff4757"
-    };
-    return defaults[key];
-}
-
-// Set page title
-document.title = config.pageTitle;
-
-// Initialize the page content when DOM is loaded
-window.addEventListener('DOMContentLoaded', () => {
-    // Validate configuration first
-    validateConfig();
-
-    // Set texts from config
-    document.getElementById('valentineTitle').textContent = `${config.valentineName}, my love...`;
-    
-    // Set first question texts
-    document.getElementById('question1Text').textContent = config.questions.first.text;
-    document.getElementById('yesBtn1').textContent = config.questions.first.yesBtn;
-    document.getElementById('noBtn1').textContent = config.questions.first.noBtn;
-    document.getElementById('secretAnswerBtn').textContent = config.questions.first.secretAnswer;
-    
-    // Set second question texts
-    document.getElementById('question2Text').textContent = config.questions.second.text;
-    document.getElementById('startText').textContent = config.questions.second.startText;
-    document.getElementById('nextBtn').textContent = config.questions.second.nextBtn;
-    
-    // Set third question texts
-    document.getElementById('question3Text').textContent = config.questions.third.text;
-    document.getElementById('yesBtn3').textContent = config.questions.third.yesBtn;
-    document.getElementById('noBtn3').textContent = config.questions.third.noBtn;
-
-    // Create initial floating elements
-    createFloatingElements();
-
-    // Setup music player
-    setupMusicPlayer();
-});
-
-// Create floating hearts and bears
+// ---------- Floating Emojis ----------
 function createFloatingElements() {
-    const container = document.querySelector('.floating-elements');
-    
-    // Create hearts
-    config.floatingEmojis.hearts.forEach(heart => {
-        const div = document.createElement('div');
-        div.className = 'heart';
-        div.innerHTML = heart;
-        setRandomPosition(div);
-        container.appendChild(div);
-    });
+  const container = document.querySelector(".floating-elements");
 
-    // Create bears
-    config.floatingEmojis.bears.forEach(bear => {
-        const div = document.createElement('div');
-        div.className = 'bear';
-        div.innerHTML = bear;
-        setRandomPosition(div);
-        container.appendChild(div);
-    });
+  const spawn = (emoji, cls) => {
+    const el = document.createElement("div");
+    el.className = cls;
+    el.textContent = emoji;
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.animationDelay = Math.random() * 5 + "s";
+    el.style.animationDuration = 10 + Math.random() * 20 + "s";
+    container.appendChild(el);
+  };
+
+  config.floatingEmojis.hearts.forEach(e => spawn(e, "heart"));
+  config.floatingEmojis.bears.forEach(e => spawn(e, "bear"));
 }
 
-// Set random position for floating elements
-function setRandomPosition(element) {
-    element.style.left = Math.random() * 100 + 'vw';
-    element.style.animationDelay = Math.random() * 5 + 's';
-    element.style.animationDuration = 10 + Math.random() * 20 + 's';
-}
-
-// Function to show next question
-function showNextQuestion(questionNumber) {
-    document.querySelectorAll('.question-section').forEach(q => q.classList.add('hidden'));
-    document.getElementById(`question${questionNumber}`).classList.remove('hidden');
-}
-
-// Function to move the "No" button when clicked
-function moveButton(button) {
-    const x = Math.random() * (window.innerWidth - button.offsetWidth);
-    const y = Math.random() * (window.innerHeight - button.offsetHeight);
-    button.style.position = 'fixed';
-    button.style.left = x + 'px';
-    button.style.top = y + 'px';
-}
-
-// Love meter functionality
-const loveMeter = document.getElementById('loveMeter');
-const loveValue = document.getElementById('loveValue');
-const extraLove = document.getElementById('extraLove');
-
-function setInitialPosition() {
-    loveMeter.value = 100;
-    loveValue.textContent = 100;
-    loveMeter.style.width = '100%';
-}
-
-loveMeter.addEventListener('input', () => {
-    const value = parseInt(loveMeter.value);
-    loveValue.textContent = value;
-    
-    if (value > 100) {
-        extraLove.classList.remove('hidden');
-        const overflowPercentage = (value - 100) / 9900;
-        const extraWidth = overflowPercentage * window.innerWidth * 0.8;
-        loveMeter.style.width = `calc(100% + ${extraWidth}px)`;
-        loveMeter.style.transition = 'width 0.3s';
-        
-        // Show different messages based on the value
-        if (value >= 5000) {
-            extraLove.classList.add('super-love');
-            extraLove.textContent = config.loveMessages.extreme;
-        } else if (value > 1000) {
-            extraLove.classList.remove('super-love');
-            extraLove.textContent = config.loveMessages.high;
-        } else {
-            extraLove.classList.remove('super-love');
-            extraLove.textContent = config.loveMessages.normal;
-        }
-    } else {
-        extraLove.classList.add('hidden');
-        extraLove.classList.remove('super-love');
-        loveMeter.style.width = '100%';
-    }
-});
-
-// Initialize love meter
-window.addEventListener('DOMContentLoaded', setInitialPosition);
-window.addEventListener('load', setInitialPosition);
-
-// Celebration function
-function celebrate() {
-    document.querySelectorAll('.question-section').forEach(q => q.classList.add('hidden'));
-    const celebration = document.getElementById('celebration');
-    celebration.classList.remove('hidden');
-    
-    // Set celebration messages
-    document.getElementById('celebrationTitle').textContent = config.celebration.title;
-    document.getElementById('celebrationMessage').textContent = config.celebration.message;
-    document.getElementById('celebrationEmojis').textContent = config.celebration.emojis;
-    
-    // Create heart explosion effect
-    createHeartExplosion();
-}
-
-// Create heart explosion animation
-function createHeartExplosion() {
-    for (let i = 0; i < 50; i++) {
-        const heart = document.createElement('div');
-        const randomHeart = config.floatingEmojis.hearts[Math.floor(Math.random() * config.floatingEmojis.hearts.length)];
-        heart.innerHTML = randomHeart;
-        heart.className = 'heart';
-        document.querySelector('.floating-elements').appendChild(heart);
-        setRandomPosition(heart);
-    }
-}
-
-// Music Player Setup
+// ---------- Music ----------
 function setupMusicPlayer() {
-    const musicControls = document.getElementById('musicControls');
-    const musicToggle = document.getElementById('musicToggle');
-    const bgMusic = document.getElementById('bgMusic');
-    const musicSource = document.getElementById('musicSource');
+  const musicControls = $("musicControls");
+  const musicToggle = $("musicToggle");
+  const bgMusic = $("bgMusic");
+  const musicSource = $("musicSource");
 
-    // Only show controls if music is enabled in config
-    if (!config.music.enabled) {
-        musicControls.style.display = 'none';
-        return;
-    }
+  if (!config.music.enabled) {
+    musicControls.style.display = "none";
+    return;
+  }
 
-    // Set music source and volume
-    musicSource.src = config.music.musicUrl;
-    bgMusic.volume = config.music.volume || 0.5;
-    bgMusic.load();
+  musicSource.src = config.music.musicUrl;
+  bgMusic.volume = config.music.volume ?? 0.5;
+  bgMusic.load();
 
-    // Try autoplay if enabled
-    if (config.music.autoplay) {
-        const playPromise = bgMusic.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.log("Autoplay prevented by browser");
-                musicToggle.textContent = config.music.startText;
-            });
-        }
-    }
-
-    // Toggle music on button click
-    musicToggle.addEventListener('click', () => {
-        if (bgMusic.paused) {
-            bgMusic.play();
-            musicToggle.textContent = config.music.stopText;
-        } else {
-            bgMusic.pause();
-            musicToggle.textContent = config.music.startText;
-        }
+  if (config.music.autoplay) {
+    bgMusic.play().then(() => {
+      musicToggle.textContent = config.music.stopText;
+    }).catch(() => {
+      musicToggle.textContent = config.music.startText;
     });
-} 
+  }
+
+  musicToggle.addEventListener("click", () => {
+    if (bgMusic.paused) {
+      bgMusic.play();
+      musicToggle.textContent = config.music.stopText;
+    } else {
+      bgMusic.pause();
+      musicToggle.textContent = config.music.startText;
+    }
+  });
+}
+
+// ---------- Gift Unwrap ----------
+function setupGiftIntro() {
+  const overlay = $("giftOverlay");
+  const btn = $("unwrapBtn");
+  const img = $("giftImage");
+
+  $("giftTitle").textContent = config.intro.title;
+  $("giftSubtitle").textContent = config.intro.subtitle;
+
+  img.src = config.intro.underImage;
+
+  let timer = null;
+
+  const startHold = () => {
+    btn.classList.add("holding");
+    timer = window.setTimeout(() => {
+      overlay.classList.add("unwrapped");
+      window.setTimeout(() => hide(overlay), 700);
+      startStory(); // go into story after unwrap
+    }, config.intro.holdToUnwrapMs ?? 1400);
+  };
+
+  const cancelHold = () => {
+    btn.classList.remove("holding");
+    if (timer) window.clearTimeout(timer);
+    timer = null;
+  };
+
+  btn.addEventListener("mousedown", startHold);
+  btn.addEventListener("touchstart", startHold);
+
+  window.addEventListener("mouseup", cancelHold);
+  window.addEventListener("touchend", cancelHold);
+}
+
+// ---------- Story + Password Gates ----------
+let storyIndex = 0;
+
+function startStory() {
+  $("valentineTitle").textContent = `${config.valentineName}, my love...`;
+
+  show($("storySection"));
+  if (config.notes.enabled) show($("notesSection"));
+
+  renderStory();
+}
+
+function renderStory() {
+  const story = config.story;
+  const chapter = story.chapters[storyIndex];
+
+  $("storyTitle").textContent = story.title;
+  $("storyText").textContent = chapter.text;
+  $("storyCaption").textContent = chapter.caption ?? "";
+  $("storyImg").src = chapter.image;
+
+  $("storyBack").disabled = storyIndex === 0;
+  $("storyBack").classList.toggle("disabled-btn", storyIndex === 0);
+
+  // If next chapter requires password, we handle on Next click
+}
+
+function openPasswordModal(chapter, onSuccess) {
+  const modal = $("passwordModal");
+  const hint = $("passwordHint");
+  const input = $("passwordInput");
+  const err = $("passwordError");
+
+  $("passwordTitle").textContent = "Password required 🔒";
+  hint.textContent = chapter.hint ? chapter.hint : "No hint this time 😛";
+  input.value = "";
+  hide(err);
+  show(modal);
+  input.focus();
+
+  const cleanup = () => {
+    $("passwordSubmit").onclick = null;
+    $("passwordCancel").onclick = null;
+    input.onkeydown = null;
+  };
+
+  const close = () => {
+    cleanup();
+    hide(modal);
+  };
+
+  const check = () => {
+    const entered = (input.value || "").trim().toLowerCase();
+    const correct = (chapter.password || "").trim().toLowerCase();
+    if (entered && entered === correct) {
+      close();
+      onSuccess();
+    } else {
+      show(err);
+      input.select();
+    }
+  };
+
+  $("passwordSubmit").onclick = check;
+  $("passwordCancel").onclick = close;
+  input.onkeydown = (e) => {
+    if (e.key === "Enter") check();
+    if (e.key === "Escape") close();
+  };
+}
+
+function setupStoryNav() {
+  $("storyBack").addEventListener("click", () => {
+    if (storyIndex > 0) {
+      storyIndex--;
+      renderStory();
+    }
+  });
+
+  $("storyNext").addEventListener("click", () => {
+    const chapters = config.story.chapters;
+
+    // last chapter -> go to final question
+    if (storyIndex >= chapters.length - 1) {
+      hide($("storySection"));
+      if (config.notes.enabled) show($("notesSection"));
+
+      showFinalQuestion();
+      return;
+    }
+
+    const nextChapter = chapters[storyIndex + 1];
+    if (nextChapter.requiresPassword) {
+      openPasswordModal(nextChapter, () => {
+        storyIndex++;
+        renderStory();
+      });
+    } else {
+      storyIndex++;
+      renderStory();
+    }
+  });
+}
+
+// ---------- Notes (auto-save) ----------
+function setupNotes() {
+  const box = $("notesBox");
+  const key = `valentine_notes_${config.valentineName}`;
+
+  const saved = localStorage.getItem(key);
+  box.value = saved ?? (config.notes.defaultText ?? "");
+
+  box.addEventListener("input", () => {
+    localStorage.setItem(key, box.value);
+  });
+}
+
+// ---------- Final Question + No runs away ----------
+function showFinalQuestion() {
+  const q = config.finalQuestion;
+
+  $("question3Text").textContent = q.text;
+  $("yesBtn3").textContent = q.yesBtn;
+  $("noBtn3").textContent = q.noBtn;
+
+  show($("question3"));
+  setupFinalButtons();
+}
+
+function runAway(button) {
+  const padding = 20;
+  const maxX = window.innerWidth - button.offsetWidth - padding;
+  const maxY = window.innerHeight - button.offsetHeight - padding;
+
+  const x = padding + Math.random() * Math.max(0, maxX);
+  const y = padding + Math.random() * Math.max(0, maxY);
+
+  button.style.position = "fixed";
+  button.style.left = `${x}px`;
+  button.style.top = `${y}px`;
+}
+
+function setupFinalButtons() {
+  const yes = $("yesBtn3");
+  const no = $("noBtn3");
+
+  no.addEventListener("mouseenter", () => runAway(no));
+  no.addEventListener("click", () => runAway(no));
+
+  yes.addEventListener("mouseenter", () => yes.classList.add("grow-big"));
+  yes.addEventListener("click", celebrate);
+}
+
+function celebrate() {
+  hide($("question3"));
+  const celebration = $("celebration");
+  show(celebration);
+
+  $("celebrationTitle").textContent = config.celebration.title;
+  $("celebrationMessage").textContent = config.celebration.message;
+  $("celebrationEmojis").textContent = config.celebration.emojis;
+
+  createHeartExplosion();
+}
+
+function createHeartExplosion() {
+  const container = document.querySelector(".floating-elements");
+  for (let i = 0; i < 45; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent = config.floatingEmojis.hearts[
+      Math.floor(Math.random() * config.floatingEmojis.hearts.length)
+    ];
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDelay = "0s";
+    heart.style.animationDuration = 6 + Math.random() * 10 + "s";
+    container.appendChild(heart);
+  }
+}
+
+// ---------- Easter Egg (type “love” reveals hidden button) ----------
+function setupEasterEgg() {
+  const code = (config.easterEgg.typeCode || "love").toLowerCase();
+  let buffer = "";
+
+  const btn = $("easterEggBtn");
+  btn.textContent = config.easterEgg.hiddenButtonText || "Secret ❤️";
+
+  const reveal = () => {
+    btn.classList.remove("hidden");
+    btn.classList.add("pop");
+    window.setTimeout(() => btn.classList.remove("pop"), 500);
+  };
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key.length !== 1) return;
+    buffer = (buffer + e.key.toLowerCase()).slice(-code.length);
+    if (buffer === code) reveal();
+  });
+
+  btn.addEventListener("click", () => {
+    // fun: jump to final question immediately if they find it
+    hide($("storySection"));
+    showFinalQuestion();
+  });
+}
+
+// ---------- Init ----------
+window.addEventListener("DOMContentLoaded", () => {
+  document.title = config.pageTitle;
+
+  createFloatingElements();
+  setupMusicPlayer();
+
+  setupGiftIntro();
+  setupStoryNav();
+
+  if (config.notes.enabled) setupNotes();
+
+  setupEasterEgg();
+});
