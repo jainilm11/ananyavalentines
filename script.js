@@ -172,11 +172,40 @@ function setupFinalButtons() {
   const yes = $("yesBtn3");
   const no = $("noBtn3");
 
-  no.addEventListener("mouseenter", () => runAway(no));
-  no.addEventListener("click", () => runAway(no));
+  let growCount = 0;
 
-  yes.addEventListener("mouseenter", () => yes.classList.add("grow-big"));
-  yes.addEventListener("click", celebrate);
+  function growYes() {
+    growCount++;
+    const scale = Math.min(1 + growCount * 0.12, 2.2); // caps size
+    yes.style.transform = `scale(${scale})`;
+  }
+
+  // NO button runs away + grows YES
+  no.addEventListener("mouseenter", () => {
+    runAway(no);
+    growYes();
+  });
+
+  no.addEventListener("click", () => {
+    runAway(no);
+    growYes();
+  });
+
+  // YES behavior (unchanged except explosion)
+  yes.addEventListener("mouseenter", () => {
+    yes.classList.add("yes-grow");
+  });
+
+  yes.addEventListener("mouseleave", () => {
+    yes.classList.remove("yes-grow");
+  });
+
+  yes.addEventListener("click", () => {
+    explodeYesButton(yes);
+    setTimeout(() => {
+      celebrate();
+    }, 350);
+  });
 }
 
 function celebrate() {
