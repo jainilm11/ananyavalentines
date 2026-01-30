@@ -268,6 +268,34 @@ h2{ color:var(--text-color); margin: 8px 0; }
   transition: width 0.25s ease;
 }
 
+/* Love Meter feedback */
+.love-fill{
+  transition: width 0.35s ease;
+}
+
+/* Completion pulse */
+.love-fill.pulse{
+  animation: fillPulse 0.7s ease-in-out infinite alternate;
+}
+@keyframes fillPulse{
+  from { filter: brightness(1); }
+  to   { filter: brightness(1.25); }
+}
+
+/* Tap heart burst particles */
+.tap-heart{
+  position: fixed;
+  z-index: 9999;
+  font-size: 1.4rem;
+  pointer-events: none;
+  animation: tapPop 1.2s ease forwards;
+}
+@keyframes tapPop{
+  0%   { transform: translate(0,0) scale(0.6); opacity: 0; }
+  15%  { opacity: 1; }
+  100% { transform: translate(calc(-60px + 120px * var(--rand, 0.5)), -140px) scale(1.2); opacity: 0; }
+}
+
 /* ---------- Celebration ---------- */
 .celebration-text{
   font-size:1.4em;
@@ -299,30 +327,3 @@ h2{ color:var(--text-color); margin: 8px 0; }
 @keyframes pop{ 50%{ transform: scale(1.8); } }
 /* CLICK-TO-UNWRAP NUCLEAR FIX */
 
-/* Love Meter feedback */
-.love-fill{
-  transition: width 0.35s ease;
-}
-
-/* Completion pulse */
-.love-fill.pulse{
-  animation: fillPulse 0.7s ease-in-out infinite alternate;
-}
-@keyframes fillPulse{
-  from { filter: brightness(1); }
-  to   { filter: brightness(1.25); }
-}
-
-/* Tap heart burst particles */
-.tap-heart{
-  position: fixed;
-  z-index: 9999;
-  font-size: 1.4rem;
-  pointer-events: none;
-  animation: tapPop 1.2s ease forwards;
-}
-@keyframes tapPop{
-  0%   { transform: translate(0,0) scale(0.6); opacity: 0; }
-  15%  { opacity: 1; }
-  100% { transform: translate(calc(-60px + 120px * var(--rand, 0.5)), -140px) scale(1.2); opacity: 0; }
-}
