@@ -63,11 +63,19 @@ function setupGiftIntro() {
   img.src = config.intro.underImage;
 
   btn.addEventListener("click", () => {
+  const bgMusic = document.getElementById("bgMusic");
+
+  if (bgMusic) {
+    bgMusic.currentTime = 0;   // start from beginning
+    bgMusic.play().catch(() => {});
+  }
+
   overlay.classList.add("unwrapped");
   setTimeout(() => {
     overlay.classList.add("hidden");
     overlay.style.display = "none";
   }, 700);
+
   startStory();
 });
 }
