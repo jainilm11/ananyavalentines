@@ -66,35 +66,15 @@ function setupGiftIntro() {
   const img = $("giftImage");
 
   $("giftTitle").textContent = config.intro.title;
-  $("giftSubtitle").textContent = config.intro.subtitle;
+  $("giftSubtitle").textContent = "Click to unwrap 🎁";
 
   img.src = config.intro.underImage;
 
-  let timer = null;
-
-  const startHold = () => {
-    btn.classList.add("holding");
-    timer = window.setTimeout(() => {
-      overlay.classList.add("unwrapped");
-      window.setTimeout(() => hide(overlay), 700);
-      startStory(); // go into story after unwrap
-    }, config.intro.holdToUnwrapMs ?? 1400);
-  };
-
-  const cancelHold = () => {
-    btn.classList.remove("holding");
-    if (timer) window.clearTimeout(timer);
-    timer = null;
-  };
-
-  btn.addEventListener("pointerdown", (e) => {
-  e.preventDefault();
-  startHold();
-});
-
-btn.addEventListener("pointerup", cancelHold);
-btn.addEventListener("pointerleave", cancelHold);
-window.addEventListener("pointercancel", cancelHold);
+  btn.addEventListener("click", () => {
+    overlay.classList.add("unwrapped");
+    setTimeout(() => hide(overlay), 700);
+    startStory();
+  });
 }
 
 // ---------- Story + Password Gates ----------
