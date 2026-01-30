@@ -87,11 +87,14 @@ function setupGiftIntro() {
     timer = null;
   };
 
-  btn.addEventListener("mousedown", startHold);
-  btn.addEventListener("touchstart", startHold);
+  btn.addEventListener("pointerdown", (e) => {
+  e.preventDefault();
+  startHold();
+});
 
-  window.addEventListener("mouseup", cancelHold);
-  window.addEventListener("touchend", cancelHold);
+btn.addEventListener("pointerup", cancelHold);
+btn.addEventListener("pointerleave", cancelHold);
+window.addEventListener("pointercancel", cancelHold);
 }
 
 // ---------- Story + Password Gates ----------
