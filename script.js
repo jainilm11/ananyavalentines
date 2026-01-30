@@ -40,14 +40,6 @@ function setupMusicPlayer() {
   bgMusic.volume = config.music.volume ?? 0.5;
   bgMusic.load();
 
-  if (config.music.autoplay) {
-    bgMusic.play().then(() => {
-      musicToggle.textContent = config.music.stopText;
-    }).catch(() => {
-      musicToggle.textContent = config.music.startText;
-    });
-  }
-
   musicToggle.addEventListener("click", () => {
     if (bgMusic.paused) {
       bgMusic.play();
@@ -71,6 +63,17 @@ function setupGiftIntro() {
   img.src = config.intro.underImage;
 
   btn.addEventListener("click", () => {
+  overlay.classList.add("unwrapped");
+  setTimeout(() => {
+    overlay.classList.add("hidden");
+    overlay.style.display = "none";
+  }, 700);
+  startStory();
+  
+  btn.addEventListener("click", () => {
+  const bgMusic = $("bgMusic");
+  bgMusic.play().catch(() => {});
+  
   overlay.classList.add("unwrapped");
   setTimeout(() => {
     overlay.classList.add("hidden");
