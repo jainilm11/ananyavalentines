@@ -84,7 +84,7 @@ function setupGiftIntro() {
 let storyIndex = 0;
 
 function startStory() {
-  $("valentineTitle").textContent = `${config.valentineName}, my love...`;
+  $("valentineTitle").textContent = `${config.valentineName}`;
 
   show($("storySection"));
 
