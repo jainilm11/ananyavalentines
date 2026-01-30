@@ -341,6 +341,9 @@ function startPolaroidRain() {
   const TOTAL = 15;          // total polaroids that will appear
   const INTERVAL = 500;      // ms between each polaroid
   const FALL_TIME = 5000;    // how long each one falls
+  const LANES = 8;                 // more lanes = more spread
+  let lastLane = -1;
+
 
   let spawned = 0;
 
@@ -367,7 +370,12 @@ function startPolaroidRain() {
     card.appendChild(cap);
 
     // random styling
-    const left = Math.random() * 100;
+    let lane = Math.floor(Math.random() * LANES);
+    if (lane === lastLane) lane = (lane + 1) % LANES;   // avoid same lane twice
+    lastLane = lane;
+
+    const left = 6 + lane * (88 / (LANES - 1));         // 6%..94% evenly spaced
+
     const rot = (Math.random() * 24 - 12) + "deg";
     const size = 120 + Math.random() * 70;
 
