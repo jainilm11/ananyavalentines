@@ -124,7 +124,7 @@ function setupStoryNav() {
   storyIndex++;
   renderStory();
 });
-
+}
 // ---------- Notes (auto-save) ----------
 function setupNotes() {
   const box = $("notesBox");
