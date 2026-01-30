@@ -326,6 +326,52 @@ function showLoveGame() {
       showFinalQuestion();
   };
 }
+function startPolaroidRain() {
+  const photos = (config.story?.chapters || [])
+    .map(ch => ({ src: ch.image, cap: ch.caption || "" }))
+    .filter(p => !!p.src);
+
+  if (!photos.length) return;
+
+  const DURATION_MS = 6500;   // how long each polaroid falls
+  const COUNT = 18;           // total polaroids
+
+  for (let i = 0; i < COUNT; i++) {
+    const p = photos[i % photos.length];
+
+    const card = document.createElement("div");
+    card.className = "polaroid";
+
+    const img = document.createElement("img");
+    img.src = p.src;
+    img.alt = "memory";
+
+    const cap = document.createElement("div");
+    cap.className = "cap";
+    cap.textContent = p.cap || "💖";
+
+    card.appendChild(img);
+    card.appendChild(cap);
+
+    // random placement + styling
+    const left = Math.random() * 100;            // vw
+    const rot = (Math.random() * 26 - 13) + "deg";
+    const size = 120 + Math.random() * 80;       // px
+    const delay = Math.random() * 0.8;           // s
+
+    card.style.left = left + "vw";
+    card.style.setProperty("--rot", rot);
+    card.style.width = size + "px";
+    card.style.animation = `polaroidFall ${DURATION_MS / 1000}s linear ${delay}s forwards`;
+
+    document.body.appendChild(card);
+
+    // cleanup
+    setTimeout(() => card.remove(), DURATION_MS + 1500);
+  }
+}
+
+
 
 // ---------- Init ----------
 window.addEventListener("DOMContentLoaded", () => {
