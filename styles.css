@@ -327,3 +327,5 @@ h2{ color:var(--text-color); margin: 8px 0; }
 @keyframes pop{ 50%{ transform: scale(1.8); } }
 /* CLICK-TO-UNWRAP NUCLEAR FIX */
 
+#giftOverlay * { color: black !important; }
+
