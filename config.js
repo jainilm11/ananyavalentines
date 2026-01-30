@@ -40,12 +40,6 @@ const CONFIG = {
     ]
   },
 
-  // ✅ Notes section (you write your own)
-  notes: {
-    enabled: true,
-    defaultText: "I love you because...\n- \n- \n- \n"
-  },
-
   // ✅ Final question (after story)
   finalQuestion: {
     text: "Will you be my Valentine on February 14th, 2026? 🌹",
