@@ -296,13 +296,3 @@ h2{ color:var(--text-color); margin: 8px 0; }
 .easter-egg.pop{ animation: pop 0.4s ease; }
 @keyframes pop{ 50%{ transform: scale(1.8); } }
 /* CLICK-TO-UNWRAP NUCLEAR FIX */
-
-.gift-overlay{
-  pointer-events: none;
-}
-.unwrap-btn{
-  pointer-events: auto;
-  position: relative;
-  z-index: 100000;
-}
-
