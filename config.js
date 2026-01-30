@@ -20,7 +20,7 @@ const CONFIG = {
   // Each chapter can require a password.
   // Passwords are case-insensitive.
   story: {
-    title: "Some little appreications 😇",
+    title: "Some little appreciations 😇",
     chapters: [
       {
         text: "Hi peanut, I wanted to showcase some things that make our loVe so insanely special and how grateful I am for you in my life. We have so so many cutesy moments that I don't think I could ever forget, from laughing in rAin, school car rides, crafty dates, pumpkin carving/gingerbreads, and sm sm more. I never feel like I have enough time with you and I'm glad to be with someone that geniunely makes time fly. I have cherished the 502 days I have spent being your boyfriend and am truLy ready for the ∞ to come.",
@@ -33,8 +33,8 @@ const CONFIG = {
         image: "./assets/photo2.jpg",
       },
       {
-        text: "Chapter 3 — If I could replay one thing, it would be your laugh (and the way you look when you’re happy).",
-        caption: "Memory #3",
+        text: "The one we've been waiting for. Causation = Correlation here, we argue every time we know that we are seeing each other. I want to sincerely apologize for everything thats happened these past few weeks and that none of it should have happened and our communication was just weak, and on top of that my efforts. While being sick, I let that count as an excuse and I wanted this to show you I care about you so much and will put in any effort to see you smile. I will do much better this quarter to put spotlight on US and how we can be the best ever while in long distance, this is my priority and I'm here to show you that too :)! Hope you've enjoyed this and let's move on...... ",
+        caption: "",
         image: "./assets/photo3.jpg",
       }
     ]
