@@ -134,7 +134,13 @@ h2{ color:var(--text-color); margin: 8px 0; }
 .floating-elements{ z-index: 1; }
 
 .gift-wrap, .gift-ribbon { pointer-events: none; }
-.unwrap-btn { position: relative; z-index: 5; touch-action: none; user-select: none; }
+.unwrap-btn{
+  position: relative;
+  z-index: 5;
+
+  touch-action: none;   /* 👈 THIS LINE */
+  user-select: none;    /* 👈 THIS LINE */
+}
 
 .gift-card{
   width: min(760px, 92vw);
