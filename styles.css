@@ -144,10 +144,6 @@ h2{ color:var(--text-color); margin: 8px 0; }
 .unwrap-btn{
   position: relative;
   z-index: 10;
-
-  pointer-events: auto; /* 👈 REQUIRED */
-  touch-action: none;
-  user-select: none;
 }
 
 .gift-card{
@@ -207,15 +203,6 @@ h2{ color:var(--text-color); margin: 8px 0; }
 }
 .gift-text h1{ color:white; margin:0; }
 .gift-text p{ margin:0; opacity:0.9; }
-
-.unwrap-btn{
-  position:relative;
-  z-index:2;
-}
-.unwrap-btn.holding{
-  transform: scale(1.05);
-  box-shadow: 0 0 0 10px rgba(255,255,255,0.14);
-}
 
 .tiny-hint{
   position:relative;
@@ -279,40 +266,6 @@ h2{ color:var(--text-color); margin: 8px 0; }
   box-shadow: 0 0 0 6px rgba(255, 71, 87, 0.08);
 }
 
-/* ---------- MODAL ---------- */
-.modal{
-  position: fixed;
-  inset:0;
-  background: rgba(0,0,0,0.25);
-  backdrop-filter: blur(6px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:2500;
-}
-.modal-card{
-  width: min(520px, 92vw);
-  background: white;
-  border-radius: 22px;
-  padding: 18px;
-  box-shadow: 0 20px 80px rgba(0,0,0,0.25);
-  text-align:center;
-}
-.text-input{
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 2px solid rgba(0,0,0,0.12);
-  font-size: 1rem;
-  outline:none;
-  margin-top: 10px;
-}
-.text-input:focus{
-  border-color: rgba(255, 71, 87, 0.35);
-  box-shadow: 0 0 0 6px rgba(255, 71, 87, 0.08);
-}
-.error{ color: #ff4757; margin-top: 10px; }
-
 /* ---------- Celebration ---------- */
 .celebration-text{
   font-size:1.4em;
@@ -342,3 +295,14 @@ h2{ color:var(--text-color); margin: 8px 0; }
 .easter-egg:hover{ opacity: 0.7; }
 .easter-egg.pop{ animation: pop 0.4s ease; }
 @keyframes pop{ 50%{ transform: scale(1.8); } }
+/* CLICK-TO-UNWRAP NUCLEAR FIX */
+
+.gift-overlay{
+  pointer-events: none;
+}
+.unwrap-btn{
+  pointer-events: auto;
+  position: relative;
+  z-index: 100000;
+}
+
