@@ -58,7 +58,7 @@ function setupGiftIntro() {
   const img = $("giftImage");
 
   $("giftTitle").textContent = config.intro.title;
-  $("giftSubtitle").textContent = "Click to unwrap 🎁";
+  $("giftSubtitle").textContent = "";
 
   img.src = config.intro.underImage;
 
