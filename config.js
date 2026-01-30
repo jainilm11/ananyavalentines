@@ -78,10 +78,10 @@ const CONFIG = {
     volume: 0.5
   },
   polaroids: [
+  { src: "./assets/photo4.jpg", caption: "" },
   { src: "./assets/photo5.jpg", caption: "" },
   { src: "./assets/photo6.jpg", caption: "" },
-  { src: "./assets/photo7.jpg", caption: "" },
-  { src: "./assets/photo8.jpg", caption: "" }
+  { src: "./assets/photo7.jpg", caption: "" }
 ],
 
   // ✅ Easter egg unlock
