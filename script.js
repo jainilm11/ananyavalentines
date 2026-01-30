@@ -189,6 +189,7 @@ function celebrate() {
   $("celebrationEmojis").textContent = config.celebration.emojis;
 
   createHeartExplosion();
+  startPolaroidRain();
   const bgMusic = document.getElementById("bgMusic");
 if (bgMusic) {
   bgMusic.volume = 0.2;
