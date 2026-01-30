@@ -338,9 +338,9 @@ function startPolaroidRain() {
 
   if (!photos.length) return;
 
-  const TOTAL = 22;          // total polaroids that will appear
-  const INTERVAL = 350;      // ms between each polaroid
-  const FALL_TIME = 7000;    // how long each one falls
+  const TOTAL = 15;          // total polaroids that will appear
+  const INTERVAL = 500;      // ms between each polaroid
+  const FALL_TIME = 5000;    // how long each one falls
 
   let spawned = 0;
 
