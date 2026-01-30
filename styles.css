@@ -246,24 +246,26 @@ h2{ color:var(--text-color); margin: 8px 0; }
   .story-img{ height: 280px; }
 }
 
-/* ---------- NOTES ---------- */
-.notes{
+/* ---------- LOVE METER GAME ---------- */
+.love-game{
   margin-top: 18px;
 }
-.notes-box{
+
+.love-meter{
   width: 100%;
-  min-height: 160px;
-  border-radius: 16px;
-  border: 2px solid rgba(255, 71, 87, 0.18);
-  padding: 12px;
-  font-family: inherit;
-  font-size: 1rem;
-  outline: none;
-  resize: vertical;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.08);
+  overflow: hidden;
+  margin: 12px 0 14px;
 }
-.notes-box:focus{
-  border-color: rgba(255, 71, 87, 0.35);
-  box-shadow: 0 0 0 6px rgba(255, 71, 87, 0.08);
+
+.love-fill{
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: var(--button-color);
+  transition: width 0.25s ease;
 }
 
 /* ---------- Celebration ---------- */
