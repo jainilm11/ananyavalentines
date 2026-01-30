@@ -69,17 +69,6 @@ function setupGiftIntro() {
     overlay.style.display = "none";
   }, 700);
   startStory();
-  
-  btn.addEventListener("click", () => {
-  const bgMusic = $("bgMusic");
-  bgMusic.play().catch(() => {});
-  
-  overlay.classList.add("unwrapped");
-  setTimeout(() => {
-    overlay.classList.add("hidden");
-    overlay.style.display = "none";
-  }, 700);
-  startStory();
 });
 }
 
