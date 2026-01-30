@@ -189,7 +189,18 @@ function celebrate() {
   $("celebrationEmojis").textContent = config.celebration.emojis;
 
   createHeartExplosion();
+  const bgMusic = document.getElementById("bgMusic");
+if (bgMusic) {
+  bgMusic.volume = 0.2;
+  let v = 0.2;
+  const swell = setInterval(() => {
+    v += 0.03;
+    bgMusic.volume = Math.min(v, 0.9);
+    if (v >= 0.9) clearInterval(swell);
+  }, 120);
 }
+}
+
 
 function createHeartExplosion() {
   const container = document.querySelector(".floating-elements");
