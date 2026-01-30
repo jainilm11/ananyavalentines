@@ -87,7 +87,6 @@ function startStory() {
   $("valentineTitle").textContent = `${config.valentineName}, my love...`;
 
   show($("storySection"));
-  if (config.notes.enabled) show($("notesSection"));
 
   renderStory();
 }
@@ -118,27 +117,16 @@ function setupStoryNav() {
   $("storyNext").addEventListener("click", () => {
   const chapters = config.story.chapters;
 
-  if (storyIndex >= chapters.length - 1) {
-    hide($("storySection"));
-    showFinalQuestion();
-    return;
-  }
+ if (storyIndex >= chapters.length - 1) {
+  hide($("storySection"));
+  showLoveGame();   // 👈 NEW FUN THING
+  return;
+}
+
 
   storyIndex++;
   renderStory();
 });
-}
-// ---------- Notes (auto-save) ----------
-function setupNotes() {
-  const box = $("notesBox");
-  const key = `valentine_notes_${config.valentineName}`;
-
-  const saved = localStorage.getItem(key);
-  box.value = saved ?? (config.notes.defaultText ?? "");
-
-  box.addEventListener("input", () => {
-    localStorage.setItem(key, box.value);
-  });
 }
 
 // ---------- Final Question + No runs away ----------
@@ -231,6 +219,39 @@ function setupEasterEgg() {
   });
 }
 
+let loveProgress = 0;
+
+function showLoveGame() {
+  const game = $("loveGame");
+  const fill = $("loveFill");
+  const status = $("loveStatus");
+  const btn = $("tapHeart");
+
+  loveProgress = 0;
+  fill.style.width = "0%";
+  status.textContent = "Okay… start tapping 😛";
+
+  show(game);
+
+  btn.onclick = () => {
+    loveProgress = Math.min(100, loveProgress + 12);
+    fill.style.width = loveProgress + "%";
+
+    if (loveProgress >= 100) {
+      status.textContent = "Alr bro how were you able to get to max limit but... okay now one last thing…";
+      btn.disabled = true;
+      btn.classList.add("disabled-btn");
+
+      setTimeout(() => {
+        hide(game);
+        showFinalQuestion();
+      }, 900);
+    } else {
+      status.textContent = `Love Meter: ${loveProgress}%`;
+    }
+  };
+}
+
 // ---------- Init ----------
 window.addEventListener("DOMContentLoaded", () => {
   document.title = config.pageTitle;
@@ -240,8 +261,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
   setupGiftIntro();
   setupStoryNav();
-
-  if (config.notes.enabled) setupNotes();
 
   setupEasterEgg();
 });
