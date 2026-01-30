@@ -118,15 +118,23 @@ h2{ color:var(--text-color); margin: 8px 0; }
 
 /* ---------- GIFT OVERLAY ---------- */
 .gift-overlay{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:2000;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;        /* super high */
   background: rgba(0,0,0,0.18);
   backdrop-filter: blur(6px);
 }
+
+.modal{
+  z-index: 99998;        /* slightly under gift overlay */
+}
+
+/* Also ensure other stuff can't sit above */
+.container{ position: relative; z-index: 2; }
+.floating-elements{ z-index: 1; }
+
+.gift-wrap, .gift-ribbon { pointer-events: none; }
+.unwrap-btn { position: relative; z-index: 5; touch-action: none; user-select: none; }
 
 .gift-card{
   width: min(760px, 92vw);
