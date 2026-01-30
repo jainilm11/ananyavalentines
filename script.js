@@ -64,17 +64,29 @@ function setupGiftIntro() {
   const overlay = document.getElementById("giftOverlay");
   const btn = document.getElementById("unwrapBtn");
   const img = document.getElementById("giftImage");
+  const titleEl = document.getElementById("giftTitle");
+  const subEl = document.getElementById("giftSubtitle");
 
-  document.getElementById("giftTitle").textContent = config.intro.title;
-  document.getElementById("giftSubtitle").textContent = config.intro.subtitle;
+  // ✅ If you changed gift wrap HTML, this prevents the whole script from dying
+  if (!overlay || !btn || !img || !titleEl || !subEl) {
+    console.error("Gift intro missing elements. Check these IDs exist in index.html:", {
+      giftOverlay: !!overlay,
+      unwrapBtn: !!btn,
+      giftImage: !!img,
+      giftTitle: !!titleEl,
+      giftSubtitle: !!subEl
+    });
+    return;
+  }
 
+  titleEl.textContent = config.intro.title;
+  subEl.textContent = config.intro.subtitle;
   img.src = config.intro.underImage;
 
   let timer = null;
 
   const startHold = () => {
     if (timer) return;
-
     btn.classList.add("holding");
 
     timer = setTimeout(() => {
@@ -93,7 +105,6 @@ function setupGiftIntro() {
     timer = null;
   };
 
-  // ✅ POINTER EVENTS (works on mouse, touch, trackpad)
   btn.addEventListener("pointerdown", startHold);
   btn.addEventListener("pointerup", cancelHold);
   btn.addEventListener("pointerleave", cancelHold);
