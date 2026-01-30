@@ -121,50 +121,6 @@ function renderStory() {
   // If next chapter requires password, we handle on Next click
 }
 
-function openPasswordModal(chapter, onSuccess) {
-  const modal = $("passwordModal");
-  const hint = $("passwordHint");
-  const input = $("passwordInput");
-  const err = $("passwordError");
-
-  $("passwordTitle").textContent = "Password required 🔒";
-  hint.textContent = chapter.hint ? chapter.hint : "No hint this time 😛";
-  input.value = "";
-  hide(err);
-  show(modal);
-  input.focus();
-
-  const cleanup = () => {
-    $("passwordSubmit").onclick = null;
-    $("passwordCancel").onclick = null;
-    input.onkeydown = null;
-  };
-
-  const close = () => {
-    cleanup();
-    hide(modal);
-  };
-
-  const check = () => {
-    const entered = (input.value || "").trim().toLowerCase();
-    const correct = (chapter.password || "").trim().toLowerCase();
-    if (entered && entered === correct) {
-      close();
-      onSuccess();
-    } else {
-      show(err);
-      input.select();
-    }
-  };
-
-  $("passwordSubmit").onclick = check;
-  $("passwordCancel").onclick = close;
-  input.onkeydown = (e) => {
-    if (e.key === "Enter") check();
-    if (e.key === "Escape") close();
-  };
-}
-
 function setupStoryNav() {
   $("storyBack").addEventListener("click", () => {
     if (storyIndex > 0) {
