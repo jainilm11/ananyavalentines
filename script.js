@@ -176,7 +176,7 @@ function setupFinalButtons() {
 
   function growYes() {
     growCount++;
-    const scale = Math.min(1 + growCount * 0.12, 2.2); // caps size
+    const scale = Math.min(1 + growCount * 0.22, 6.0); // caps size
     yes.style.transform = `scale(${scale})`;
   }
 
