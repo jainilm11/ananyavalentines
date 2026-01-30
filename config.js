@@ -32,7 +32,7 @@ const CONFIG = {
         text: "Chapter 2 — I started collecting little moments. The kind you don’t want to forget.",
         caption: "Memory #2",
         image: "./assets/photo2.jpg",
-        requiresPassword: true,
+        requiresPassword: false,
         password: "boba", // <- change this
         hint: "Hint: our favorite drink 🧋"
       },
@@ -40,7 +40,7 @@ const CONFIG = {
         text: "Chapter 3 — If I could replay one thing, it would be your laugh (and the way you look when you’re happy).",
         caption: "Memory #3",
         image: "./assets/photo3.jpg",
-        requiresPassword: true,
+        requiresPassword: false,
         password: "0214", // <- change this
         hint: "Hint: 4 digits"
       }
