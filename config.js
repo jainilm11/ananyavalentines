@@ -29,7 +29,7 @@ const CONFIG = {
       },
       {
         text: "Apart from the strong love in our relationship, one of my favorites is our weirdness. From the cute yet funny faces that you make in 500+ facetime photos to insane bathroom stories, I feel so comfortable around you and I don't think I could ever judge/find you weird at all. Having a best friend and girlfriend that can make me constantly laugh and smile is the best thing of our relationship, something I would never ever give up. Thank you for being so unapologeticly yourself #YouDoYou❤️",
-        caption: "Memory #2",
+        caption: "",
         image: "./assets/photo2.jpg",
       },
       {
