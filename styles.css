@@ -5,10 +5,10 @@
   --button-hover:#ff8787;
   --text-color:#ff4757;
 
-  --float-duration:15s;
-  --float-distance:50px;
+  --float-duration:8s;
+  --float-distance:40px;
   --bounce-speed:0.5s;
-  --heart-explosion-size:1.5;
+  --heart-explosion-size:2.0;
 }
 
 body{
