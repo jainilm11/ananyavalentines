@@ -23,8 +23,8 @@ const CONFIG = {
     title: "Some little appreications 😇",
     chapters: [
       {
-        text: "Chapter 1 — There’s this person who somehow makes normal days feel like special ones.",
-        caption: "Memory #1",
+        text: "Hi peanut, I wanted to showcase some things that make our loVe so insanely special and how grateful I am for you in my life. 1, we have so so many cutesy moments that I don't think I could ever forget, from smiles in the rAin, precious car rides, pottery painting, pumpkin carving, and sm sm more. I have cherished the 502 days I have spent being your boyfriend and am truly ready for the ∞ to come.",
+        caption: "",
         image: "./assets/photo1.jpg",
       },
       {
