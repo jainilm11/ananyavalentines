@@ -30,7 +30,7 @@ const CONFIG = {
       {
         text: "Chapter 2 — I started collecting little moments. The kind you don’t want to forget.",
         caption: "Memory #2",
-        image: "./assets/photo2.jpeg",
+        image: "./assets/photo2.jpg",
       },
       {
         text: "Chapter 3 — If I could replay one thing, it would be your laugh (and the way you look when you’re happy).",
