@@ -364,7 +364,7 @@ function startPolaroidRain() {
 
     const cap = document.createElement("div");
     cap.className = "cap";
-    cap.textContent = p.caption || "💖";
+    cap.textContent = p.caption || "";
 
     card.appendChild(img);
     card.appendChild(cap);
