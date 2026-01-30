@@ -71,10 +71,13 @@ function setupGiftIntro() {
   img.src = config.intro.underImage;
 
   btn.addEventListener("click", () => {
-    overlay.classList.add("unwrapped");
-    setTimeout(() => hide(overlay), 700);
-    startStory();
-  });
+  overlay.classList.add("unwrapped");
+  setTimeout(() => {
+    overlay.classList.add("hidden");
+    overlay.style.display = "none";
+  }, 700);
+  startStory();
+});
 }
 
 // ---------- Story + Password Gates ----------
