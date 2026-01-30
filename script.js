@@ -61,54 +61,37 @@ function setupMusicPlayer() {
 
 // ---------- Gift Unwrap ----------
 function setupGiftIntro() {
-  const overlay = document.getElementById("giftOverlay");
-  const btn = document.getElementById("unwrapBtn");
-  const img = document.getElementById("giftImage");
-  const titleEl = document.getElementById("giftTitle");
-  const subEl = document.getElementById("giftSubtitle");
+  const overlay = $("giftOverlay");
+  const btn = $("unwrapBtn");
+  const img = $("giftImage");
 
-  // ✅ If you changed gift wrap HTML, this prevents the whole script from dying
-  if (!overlay || !btn || !img || !titleEl || !subEl) {
-    console.error("Gift intro missing elements. Check these IDs exist in index.html:", {
-      giftOverlay: !!overlay,
-      unwrapBtn: !!btn,
-      giftImage: !!img,
-      giftTitle: !!titleEl,
-      giftSubtitle: !!subEl
-    });
-    return;
-  }
+  $("giftTitle").textContent = config.intro.title;
+  $("giftSubtitle").textContent = config.intro.subtitle;
 
-  titleEl.textContent = config.intro.title;
-  subEl.textContent = config.intro.subtitle;
   img.src = config.intro.underImage;
 
   let timer = null;
 
   const startHold = () => {
-    if (timer) return;
     btn.classList.add("holding");
-
-    timer = setTimeout(() => {
+    timer = window.setTimeout(() => {
       overlay.classList.add("unwrapped");
-
-      setTimeout(() => {
-        overlay.style.display = "none";
-        startStory();
-      }, 700);
-    }, config.intro.holdToUnwrapMs || 1400);
+      window.setTimeout(() => hide(overlay), 700);
+      startStory(); // go into story after unwrap
+    }, config.intro.holdToUnwrapMs ?? 1400);
   };
 
   const cancelHold = () => {
     btn.classList.remove("holding");
-    clearTimeout(timer);
+    if (timer) window.clearTimeout(timer);
     timer = null;
   };
 
-  btn.addEventListener("pointerdown", startHold);
-  btn.addEventListener("pointerup", cancelHold);
-  btn.addEventListener("pointerleave", cancelHold);
-  btn.addEventListener("pointercancel", cancelHold);
+  btn.addEventListener("mousedown", startHold);
+  btn.addEventListener("touchstart", startHold);
+
+  window.addEventListener("mouseup", cancelHold);
+  window.addEventListener("touchend", cancelHold);
 }
 // ---------- Story + Password Gates ----------
 let storyIndex = 0;
