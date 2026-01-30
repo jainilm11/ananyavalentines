@@ -93,6 +93,7 @@ function setupGiftIntro() {
   window.addEventListener("mouseup", cancelHold);
   window.addEventListener("touchend", cancelHold);
 }
+
 // ---------- Story + Password Gates ----------
 let storyIndex = 0;
 
