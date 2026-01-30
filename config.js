@@ -82,7 +82,7 @@ const CONFIG = {
   { src: "./assets/photo6.jpg", caption: "" },
   { src: "./assets/photo7.jpg", caption: "" },
   { src: "./assets/photo8.jpg", caption: "" }
-]
+],
 
   // ✅ Easter egg unlock
   // Type this secret code anywhere to reveal a hidden button
