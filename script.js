@@ -130,29 +130,17 @@ function setupStoryNav() {
   });
 
   $("storyNext").addEventListener("click", () => {
-    const chapters = config.story.chapters;
+  const chapters = config.story.chapters;
 
-    // last chapter -> go to final question
-    if (storyIndex >= chapters.length - 1) {
-      hide($("storySection"));
-      if (config.notes.enabled) show($("notesSection"));
+  if (storyIndex >= chapters.length - 1) {
+    hide($("storySection"));
+    showFinalQuestion();
+    return;
+  }
 
-      showFinalQuestion();
-      return;
-    }
-
-    const nextChapter = chapters[storyIndex + 1];
-    if (nextChapter.requiresPassword) {
-      openPasswordModal(nextChapter, () => {
-        storyIndex++;
-        renderStory();
-      });
-    } else {
-      storyIndex++;
-      renderStory();
-    }
-  });
-}
+  storyIndex++;
+  renderStory();
+});
 
 // ---------- Notes (auto-save) ----------
 function setupNotes() {
