@@ -87,8 +87,8 @@ const CONFIG = {
   // ✅ Easter egg unlock
   // Type this secret code anywhere to reveal a hidden button
   easterEgg: {
-    typeCode: "love", // typing L O V E reveals the hidden button
-    hiddenButtonText: "I don't like you, I love you! ❤️"
+    typeCode: "nailong", // typing L O V E reveals the hidden button
+    hiddenButtonText: "Sneaky lil shortcut"
   }
 };
 
