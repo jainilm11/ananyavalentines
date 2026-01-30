@@ -20,7 +20,7 @@ const CONFIG = {
   // Each chapter can require a password.
   // Passwords are case-insensitive.
   story: {
-    title: "Before the question… a tiny story 📖",
+    title: "Some little appreications 😇",
     chapters: [
       {
         text: "Chapter 1 — There’s this person who somehow makes normal days feel like special ones.",
