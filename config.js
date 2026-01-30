@@ -1,5 +1,5 @@
 const CONFIG = {
-  valentineName: "Ananya",
+  valentineName: " Dear Ananya,",
   pageTitle: "Secret Surprise 🤭😛",
 
   floatingEmojis: {
