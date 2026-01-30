@@ -99,7 +99,6 @@ function setupGiftIntro() {
   btn.addEventListener("pointerleave", cancelHold);
   btn.addEventListener("pointercancel", cancelHold);
 }
-
 // ---------- Story + Password Gates ----------
 let storyIndex = 0;
 
