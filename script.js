@@ -201,11 +201,23 @@ function setupFinalButtons() {
   });
 
   yes.addEventListener("click", () => {
-    explodeYesButton(yes);
-    setTimeout(() => {
       celebrate();
-    }, 350);
   });
+}
+
+function createHeartExplosion() {
+  const container = document.querySelector(".floating-elements");
+  for (let i = 0; i < 45; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent = config.floatingEmojis.hearts[
+      Math.floor(Math.random() * config.floatingEmojis.hearts.length)
+    ];
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDelay = "0s";
+    heart.style.animationDuration = 6 + Math.random() * 10 + "s";
+    container.appendChild(heart);
+  }
 }
 
 function celebrate() {
@@ -229,22 +241,6 @@ if (bgMusic) {
     if (v >= 0.9) clearInterval(swell);
   }, 120);
 }
-}
-
-
-function createHeartExplosion() {
-  const container = document.querySelector(".floating-elements");
-  for (let i = 0; i < 45; i++) {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.textContent = config.floatingEmojis.hearts[
-      Math.floor(Math.random() * config.floatingEmojis.hearts.length)
-    ];
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDelay = "0s";
-    heart.style.animationDuration = 6 + Math.random() * 10 + "s";
-    container.appendChild(heart);
-  }
 }
 
 // ---------- Easter Egg (type “love” reveals hidden button) ----------
