@@ -3,7 +3,7 @@ const CONFIG = {
   pageTitle: "Secret Surprise 🤭😛",
 
   floatingEmojis: {
-    hearts: ["❤️","💖","💝","💗","💓"],
+    hearts: ["❤️","🥜","💝","💗","💓"],
     bears: ["🧸","🐻"]
   },
 
