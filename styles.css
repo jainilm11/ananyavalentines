@@ -372,3 +372,9 @@ h2{ color:var(--text-color); margin: 8px 0; }
   }
 }
 
+/* YES grows when NO is attempted */
+.yes-grow {
+  transform: scale(1.15);
+  transition: transform 0.25s ease;
+}
+
