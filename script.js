@@ -265,41 +265,40 @@ function showLoveGame() {
   show(game);
 
   tapBtn.onclick = () => {
-    loveTaps++;
-    loveProgress = Math.min(100, loveProgress + INCREMENT);
+    loveProgress += INCREMENT;
 
-    // smooth animated fill
+    if (loveProgress > 100) loveProgress = 100;
+
     fill.style.width = loveProgress + "%";
+    counter.textContent = `${loveProgress}%`;
 
-    // tiny “automation” / feedback per tap
-    burstHearts();
+  // tap animation
+    fill.classList.remove("bump");
+    void fill.offsetWidth;
+    fill.classList.add("bump");
 
-    counter.textContent = `${loveProgress}% • ${loveTaps} taps`;
+    if (loveProgress === 100) {
+      status.textContent = "Alr bro how were you able to get the max limit u should say infinity but... one last thing 👀";
 
-    if (loveProgress >= 100) {
-      status.textContent = "Alr bro how were you able to get the max limit u should say infinity but...";
       tapBtn.disabled = true;
       tapBtn.classList.add("disabled-btn");
 
-      // little pulse to celebrate completion
-      fill.classList.add("pulse");
+    // 👇 FORCE SHOW NEXT
+      nextBtn.classList.remove("hidden");
+      nextBtn.style.display = "inline-block";
 
-      // longer pause, THEN reveal Next button (no auto-jump)
-      setTimeout(() => {
-        status.textContent = "Ready for the final question? 👀";
-        nextBtn.classList.remove("hidden");
-      }, COMPLETE_DELAY_MS);
-    } else {
-      // fun messages while filling
-      if (loveProgress < 35) status.textContent = "WOOOO";
-      else if (loveProgress < 70) status.textContent = "Yay u like me";
-      else status.textContent = "U cringe u love me";
-    }
-  };
+      return; // stop further taps
+  }
 
-  nextBtn.onclick = () => {
-    hide(game);
-    showFinalQuestion();
+    status.textContent =
+      loveProgress < 35 ? "WOOO" :
+      loveProgress < 70 ? "Yay u like me" :
+      "U cringe u love me sm";
+};
+
+    nextBtn.onclick = () => {
+      hide(game);
+      showFinalQuestion();
   };
 }
 
