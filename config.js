@@ -28,12 +28,12 @@ const CONFIG = {
         image: "./assets/photo1.jpg",
       },
       {
-        text: "Apart from the strong love in our relationship, one of my favorites is our weirdness. From the cute yet funny faces that you make in 500+ facetime photos to insane bathroom stories, I feel so comfortable around you and I don't think I could ever judge/find you weird at all. Having a best friend and girlfriend that can make me constantly laugh and smile is the best thing of our relationship, something I would never ever give up. Thank you for being so unapologeticly yourself #YouDoYou❤️",
+        text: "Apart from the strong lovE in our relationship, one of my favorites is our weirdness. From the cute yet funny faces that you make in 500+ facetime photos to iNsane bathroom stories, I feel so comfortable around you and I don't think I could ever judge/find you weird at all. Having a best friend and girlfriend that can make me constanTly laugh and smile is the best thing of our relationship, something I would never ever give up. Thank you for being so unapologeticly yourself #YouDoYou❤️",
         caption: "",
         image: "./assets/photo2.jpg",
       },
       {
-        text: "The one we've been waiting for. Causation = Correlation here, we argue every time we know that we are seeing each other. I want to sincerely apologize for everything thats happened these past few weeks and that none of it should have happened and our communication was just weak, and on top of that my efforts. While being sick, I let that count as an excuse and I wanted this to show you I care about you so much and will put in any effort to see you smile. I will do much better this quarter to put spotlight on US and how we can be the best ever while in long distance, this is my priority and I'm here to show you that too :)! Hope you've enjoyed this and let's move on...... ",
+        text: "The one we've been waiting for. CausatIon = Correlation here, we argue every time we know that we are seeing each other. I want to siNcerely apologize for everything thats happened these past few weeks and that none of it should have happened and our communication was just weak, and on top of that my efforts. While being sick, I let that count as an excuse and I wanted this to show you I care about you so much and will put in any effort to see you smile. I will do much better this quarter to put spotlight on US and how we can be the best ever while in long distancE, this is my priority and I'm here to show you that too :)! Hope you've enjoyed this and let's move on...... ",
         caption: "",
         image: "./assets/photo3.jpg",
       }
