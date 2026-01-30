@@ -42,16 +42,16 @@ const CONFIG = {
 
   // ✅ Final question (after story)
   finalQuestion: {
-    text: "Will you be my Valentine on February 14th, 2026? 🌹",
-    yesBtn: "YES!!! 💝",
+    text: "Will you be my Valentine?",
+    yesBtn: "Yes",
     noBtn: "No"
   },
 
   // ✅ Celebration
   celebration: {
-    title: "Yay! I'm the luckiest person in the world! 🎉💝💖💝💓",
-    message: "Now come get your gift, a big warm hug and a huge kiss!",
-    emojis: "🎁💖🤗💝💋❤️💕"
+    title: "WOOOOOOOOOOOO!!!!! VALENTINE ✅ ✅ ✅ ✅  ",
+    message: "Check out what's in your closet :)",
+    emojis: "😜😊🫶🏼😍🤗💕"
   },
 
   colors: {
