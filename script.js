@@ -328,17 +328,29 @@ function showLoveGame() {
   };
 }
 function startPolaroidRain() {
-  const photos = (config.story?.chapters || [])
-    .map(ch => ({ src: ch.image, cap: ch.caption || "" }))
-    .filter(p => !!p.src);
+  // Choose source: explicit polaroids OR story images
+  const photos = (config.polaroids && config.polaroids.length)
+    ? config.polaroids
+    : (config.story?.chapters || []).map(ch => ({
+        src: ch.image,
+        caption: ch.caption || ""
+      })).filter(p => p.src);
 
   if (!photos.length) return;
 
-  const DURATION_MS = 6500;   // how long each polaroid falls
-  const COUNT = 18;           // total polaroids
+  const TOTAL = 22;          // total polaroids that will appear
+  const INTERVAL = 350;      // ms between each polaroid
+  const FALL_TIME = 7000;    // how long each one falls
 
-  for (let i = 0; i < COUNT; i++) {
-    const p = photos[i % photos.length];
+  let spawned = 0;
+
+  const timer = setInterval(() => {
+    if (spawned >= TOTAL) {
+      clearInterval(timer);
+      return;
+    }
+
+    const p = photos[spawned % photos.length];
 
     const card = document.createElement("div");
     card.className = "polaroid";
@@ -349,30 +361,27 @@ function startPolaroidRain() {
 
     const cap = document.createElement("div");
     cap.className = "cap";
-    cap.textContent = p.cap || "💖";
+    cap.textContent = p.caption || "💖";
 
     card.appendChild(img);
     card.appendChild(cap);
 
-    // random placement + styling
-    const left = Math.random() * 100;            // vw
-    const rot = (Math.random() * 26 - 13) + "deg";
-    const size = 120 + Math.random() * 80;       // px
-    const delay = Math.random() * 0.8;           // s
+    // random styling
+    const left = Math.random() * 100;
+    const rot = (Math.random() * 24 - 12) + "deg";
+    const size = 120 + Math.random() * 70;
 
     card.style.left = left + "vw";
-    card.style.setProperty("--rot", rot);
     card.style.width = size + "px";
-    card.style.animation = `polaroidFall ${DURATION_MS / 1000}s linear ${delay}s forwards`;
+    card.style.setProperty("--rot", rot);
+    card.style.animation = `polaroidFall ${FALL_TIME / 1000}s linear forwards`;
 
     document.body.appendChild(card);
 
-    // cleanup
-    setTimeout(() => card.remove(), DURATION_MS + 1500);
-  }
+    setTimeout(() => card.remove(), FALL_TIME + 1000);
+    spawned++;
+  }, INTERVAL);
 }
-
-
 
 // ---------- Init ----------
 window.addEventListener("DOMContentLoaded", () => {
