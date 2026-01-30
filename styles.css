@@ -120,10 +120,17 @@ h2{ color:var(--text-color); margin: 8px 0; }
 .gift-overlay{
   position: fixed;
   inset: 0;
-  z-index: 99999;        /* super high */
+  z-index: 99999;
   background: rgba(0,0,0,0.18);
   backdrop-filter: blur(6px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: auto; /* 👈 REQUIRED */
 }
+
 
 .modal{
   z-index: 99998;        /* slightly under gift overlay */
@@ -136,10 +143,11 @@ h2{ color:var(--text-color); margin: 8px 0; }
 .gift-wrap, .gift-ribbon { pointer-events: none; }
 .unwrap-btn{
   position: relative;
-  z-index: 5;
+  z-index: 10;
 
-  touch-action: none;   /* 👈 THIS LINE */
-  user-select: none;    /* 👈 THIS LINE */
+  pointer-events: auto; /* 👈 REQUIRED */
+  touch-action: none;
+  user-select: none;
 }
 
 .gift-card{
