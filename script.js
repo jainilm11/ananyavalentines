@@ -20,8 +20,22 @@ function createFloatingElements() {
     container.appendChild(el);
   };
 
-  config.floatingEmojis.hearts.forEach(e => spawn(e, "heart"));
-  config.floatingEmojis.bears.forEach(e => spawn(e, "bear"));
+  const HEART_COUNT = 25;
+const BEAR_COUNT = 10;
+
+for (let i = 0; i < HEART_COUNT; i++) {
+  spawn(
+    config.floatingEmojis.hearts[i % config.floatingEmojis.hearts.length],
+    "heart"
+  );
+}
+
+for (let i = 0; i < BEAR_COUNT; i++) {
+  spawn(
+    config.floatingEmojis.bears[i % config.floatingEmojis.bears.length],
+    "bear"
+  );
+}
 }
 
 // ---------- Music ----------
