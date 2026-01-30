@@ -3,14 +3,14 @@ const CONFIG = {
   pageTitle: "Secret Surprise 🤭😛",
 
   floatingEmojis: {
-    hearts: ["❤️","🥜","💝","💗","💓"],
-    bears: ["🧸","🐻"]
+    hearts: ["❤️","🥜","💌","💕","🪐"],
+    bears: ["🧸","😈"]
   },
 
   // ✅ Gift intro screen
   intro: {
-    title: "A gift for you 🎁",
-    subtitle: "Hold the button to unwrap…",
+    title: "Heyyyyyyy",
+    subtitle: "OPEN!",
     // put an image in /assets and set the path here
     underImage: "./assets/cover.jpg",
     holdToUnwrapMs: 1400
