@@ -23,12 +23,12 @@ const CONFIG = {
     title: "Some little appreications 😇",
     chapters: [
       {
-        text: "Hi peanut, I wanted to showcase some things that make our loVe so insanely special and how grateful I am for you in my life. 1, we have so so many cutesy moments that I don't think I could ever forget, from smiles in the rAin, precious car rides, pottery painting, pumpkin carving, and sm sm more. I have cherished the 502 days I have spent being your boyfriend and am truly ready for the ∞ to come.",
+        text: "Hi peanut, I wanted to showcase some things that make our loVe so insanely special and how grateful I am for you in my life. We have so so many cutesy moments that I don't think I could ever forget, from laughing in rAin, school car rides, crafty dates, pumpkin carving/gingerbreads, and sm sm more. I never feel like I have enough time with you and I'm glad to be with someone that geniunely makes time fly. I have cherished the 502 days I have spent being your boyfriend and am truLy ready for the ∞ to come.",
         caption: "",
         image: "./assets/photo1.jpg",
       },
       {
-        text: "Chapter 2 — I started collecting little moments. The kind you don’t want to forget.",
+        text: "Apart from the strong love in our relationship, one of my favorites is our weirdness. From the cute yet funny faces that you make in 500+ facetime photos to insane bathroom stories, I feel so comfortable around you and I don't think I could ever judge/find you weird at all. Having a best friend and girlfriend that can make me constantly laugh and smile is the best thing of our relationship, something I would never ever give up. Thank you for being so unapologeticly yourself #YouDoYou❤️",
         caption: "Memory #2",
         image: "./assets/photo2.jpg",
       },
